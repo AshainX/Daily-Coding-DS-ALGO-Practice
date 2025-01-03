@@ -1,7 +1,7 @@
  /*Implementation of java program to print all the permutations of a string
  * With duplicates allowed */
  
-import java.util.*;
+/*import java.util.*;
 import java.lang.*;
 import java.io.*;
 
@@ -53,7 +53,70 @@ public class Print_all_permutations_of_String
         Print_all_permutations_of_String obj = new Print_all_permutations_of_String();
         obj.permutation(arr, 0, arr.length);    //function call to print the permutations of string
     }
+}*/
+
+import java.util.Scanner;
+
+public class PrintAllPermutations {
+
+    /**
+     * This function prints all permutations of the string using backtracking.
+     * 
+     * @param charArr - Character array of the given string
+     * @param start   - Starting index
+     * @param size    - Size of the character array
+     */
+    public void permutation(char[] charArr, int start, int size) {
+        if (start == size) { // Check if the character array is fully traversed
+            for (char c : charArr) {
+                System.out.print(c); // Print permutation
+            }
+            System.out.println();
+        } else {
+            for (int x = start; x < size; x++) {
+                swap(charArr, start, x); // Swap to create new permutation
+                permutation(charArr, start + 1, size); // Recursive call
+                swap(charArr, start, x); // Backtrack by swapping back
+            }
+        }
+    }
+
+    /**
+     * Swaps the i-th and j-th positions in the character array.
+     * 
+     * @param charArr - Character array
+     * @param i       - First index
+     * @param j       - Second index
+     */
+    public void swap(char[] charArr, int i, int j) {
+        char temp = charArr[i];
+        charArr[i] = charArr[j];
+        charArr[j] = temp;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter a string:");
+        String input = sc.nextLine(); // Read input string
+
+        if (input.isEmpty()) {
+            System.out.println("Input string is empty. Please provide a valid string.");
+        } else {
+            char[] arr = input.toCharArray(); // Convert to character array
+            PrintAllPermutations obj = new PrintAllPermutations();
+            System.out.println("All permutations of the string:");
+            obj.permutation(arr, 0, arr.length); // Generate permutations
+        }
+
+        sc.close();
+    }
 }
+
+
+
+
+
 
 /*
  * 
